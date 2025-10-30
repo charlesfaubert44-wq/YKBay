@@ -1,9 +1,9 @@
+/* Import Mapbox GL CSS - Must be first */
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Mapbox GL CSS */
-@import 'mapbox-gl/dist/mapbox-gl.css';
 
 /* Northern Theme Base Styles */
 @layer base {

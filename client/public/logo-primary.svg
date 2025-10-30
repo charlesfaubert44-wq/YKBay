@@ -1,0 +1,93 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Primary Logo Mark: The Navigator's Star -->
+  <!-- Combines compass rose, aurora waves, and northern symbolism -->
+
+  <defs>
+    <!-- Aurora gradient for glow effects -->
+    <linearGradient id="auroraGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E8B8B;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8B5A9F;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#5B9BD5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer compass points (8-point star) -->
+  <g id="compass-star">
+    <!-- North point (top) - Most prominent -->
+    <path d="M60 10 L65 30 L60 35 L55 30 Z" fill="#2E8B8B" />
+
+    <!-- Northeast point -->
+    <path d="M85 25 L90 35 L85 40 L75 35 Z" fill="#2E8B8B" opacity="0.7" />
+
+    <!-- East point (right) -->
+    <path d="M110 60 L90 65 L85 60 L90 55 Z" fill="#2E8B8B" />
+
+    <!-- Southeast point -->
+    <path d="M95 85 L90 90 L85 85 L85 75 Z" fill="#2E8B8B" opacity="0.7" />
+
+    <!-- South point (bottom) -->
+    <path d="M60 110 L55 90 L60 85 L65 90 Z" fill="#2E8B8B" />
+
+    <!-- Southwest point -->
+    <path d="M35 95 L30 90 L35 85 L35 75 Z" fill="#2E8B8B" opacity="0.7" />
+
+    <!-- West point (left) -->
+    <path d="M10 60 L30 55 L35 60 L30 65 Z" fill="#2E8B8B" />
+
+    <!-- Northwest point -->
+    <path d="M25 35 L30 30 L35 35 L35 45 Z" fill="#2E8B8B" opacity="0.7" />
+  </g>
+
+  <!-- Aurora waves flowing between compass points -->
+  <g id="aurora-waves" opacity="0.5">
+    <!-- Northeast arc -->
+    <path d="M60 35 Q70 42 85 40"
+          stroke="#4CAF6D"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- Southeast arc -->
+    <path d="M85 60 Q78 72 85 85"
+          stroke="#5B9BD5"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- Southwest arc -->
+    <path d="M60 85 Q48 78 35 85"
+          stroke="#8B5A9F"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+
+    <!-- Northwest arc -->
+    <path d="M35 60 Q42 48 35 35"
+          stroke="#4CAF6D"
+          stroke-width="2.5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- Center mark with navigation cross -->
+  <g id="center-mark">
+    <!-- Outer circle -->
+    <circle cx="60" cy="60" r="14" fill="#0B1A2B" stroke="#2E8B8B" stroke-width="2.5"/>
+
+    <!-- Inner navigation cross -->
+    <path d="M60 52 L60 68 M52 60 L68 60"
+          stroke="#E8F4F4"
+          stroke-width="2.5"
+          stroke-linecap="round"/>
+
+    <!-- Center dot -->
+    <circle cx="60" cy="60" r="3" fill="#2E8B8B"/>
+  </g>
+
+  <!-- Subtle outer glow ring -->
+  <circle cx="60" cy="60" r="56" fill="none" stroke="url(#auroraGlow)" stroke-width="1" opacity="0.2"/>
+</svg>

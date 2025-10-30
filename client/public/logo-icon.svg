@@ -1,0 +1,71 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon Mark for App Icons (Simplified, high contrast) -->
+  <!-- Optimized for small sizes with clear, bold shapes -->
+
+  <defs>
+    <!-- Radial gradient for background depth -->
+    <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#0f1c2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0B1A2B;stop-opacity:1" />
+    </radialGradient>
+
+    <!-- Aurora glow effect -->
+    <radialGradient id="auroraGlowIcon" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#2E8B8B;stop-opacity:0.4" />
+      <stop offset="70%" style="stop-color:#4CAF6D;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#5B9BD5;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="url(#bgGradient)"/>
+
+  <!-- Aurora glow layers for depth -->
+  <circle cx="256" cy="256" r="220" fill="url(#auroraGlowIcon)"/>
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#4CAF6D" stroke-width="3" opacity="0.25"/>
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#5B9BD5" stroke-width="2" opacity="0.2"/>
+
+  <!-- Simplified 4-point compass star (N-S-E-W only for clarity) -->
+  <g id="simple-compass">
+    <!-- North point (top) -->
+    <path d="M256 80 L280 180 L256 200 L232 180 Z" fill="#2E8B8B"/>
+
+    <!-- East point (right) -->
+    <path d="M432 256 L332 280 L312 256 L332 232 Z" fill="#2E8B8B"/>
+
+    <!-- South point (bottom) -->
+    <path d="M256 432 L232 332 L256 312 L280 332 Z" fill="#2E8B8B"/>
+
+    <!-- West point (left) -->
+    <path d="M80 256 L180 232 L200 256 L180 280 Z" fill="#2E8B8B"/>
+
+    <!-- Intercardinal points (smaller, for visual balance) -->
+    <path d="M350 162 L360 200 L350 210 L325 200 Z" fill="#2E8B8B" opacity="0.6"/>
+    <path d="M350 350 L360 312 L350 302 L325 312 Z" fill="#2E8B8B" opacity="0.6"/>
+    <path d="M162 350 L152 312 L162 302 L187 312 Z" fill="#2E8B8B" opacity="0.6"/>
+    <path d="M162 162 L152 200 L162 210 L187 200 Z" fill="#2E8B8B" opacity="0.6"/>
+  </g>
+
+  <!-- Center circle with navigation symbol -->
+  <g id="center">
+    <!-- Outer ring -->
+    <circle cx="256" cy="256" r="56" fill="#0B1A2B" stroke="#2E8B8B" stroke-width="8"/>
+
+    <!-- Inner navigation cross (bold for visibility) -->
+    <path d="M256 220 L256 292 M220 256 L292 256"
+          stroke="#E8F4F4"
+          stroke-width="10"
+          stroke-linecap="round"/>
+
+    <!-- Center diamond accent -->
+    <path d="M256 242 L268 256 L256 270 L244 256 Z" fill="#4CAF6D"/>
+  </g>
+
+  <!-- Directional indicators at cardinal points -->
+  <g id="direction-markers" fill="#E8F4F4" font-family="Inter, sans-serif" font-size="36" font-weight="600" text-anchor="middle">
+    <text x="256" y="60" opacity="0.8">N</text>
+    <text x="456" y="266" opacity="0.6">E</text>
+    <text x="256" y="468" opacity="0.6">S</text>
+    <text x="56" y="266" opacity="0.6">W</text>
+  </g>
+</svg>

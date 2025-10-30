@@ -4,56 +4,58 @@ const authService = {
   // Register new user
   register: async (userData) => {
     try {
-      const response = await api.post('/auth/register', userData);
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+      // api.js response interceptor already returns response.data
+      const data = await api.post('/auth/register', userData);
+      if (data.token) {
+        localStorage.setItem('auth_token', data.token);
+        localStorage.setItem('user_data', JSON.stringify(data.user));
       }
-      return response.data;
+      return data;
     } catch (error) {
-      throw error.response?.data || { message: 'Registration failed' };
+      throw error;
     }
   },
 
   // Login user
   login: async (email, password) => {
     try {
-      const response = await api.post('/auth/login', { email, password });
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+      // api.js response interceptor already returns response.data
+      const data = await api.post('/auth/login', { email, password });
+      if (data.token) {
+        localStorage.setItem('auth_token', data.token);
+        localStorage.setItem('user_data', JSON.stringify(data.user));
       }
-      return response.data;
+      return data;
     } catch (error) {
-      throw error.response?.data || { message: 'Login failed' };
+      throw error;
     }
   },
 
   // Verify token
   verifyToken: async () => {
     try {
-      const response = await api.get('/auth/verify');
-      return response.data;
+      const data = await api.get('/auth/verify');
+      return data;
     } catch (error) {
-      throw error.response?.data || { message: 'Token verification failed' };
+      throw error;
     }
   },
 
   // Logout user
   logout: () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_data');
   },
 
   // Get current user from localStorage
   getCurrentUser: () => {
-    const userStr = localStorage.getItem('user');
+    const userStr = localStorage.getItem('user_data');
     return userStr ? JSON.parse(userStr) : null;
   },
 
   // Check if user is authenticated
   isAuthenticated: () => {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('auth_token');
   },
 };
 

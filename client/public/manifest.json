@@ -1,13 +1,13 @@
 {
-  "name": "YK Bay - True North Navigator",
-  "short_name": "YK Bay",
-  "description": "Safe boating navigation for Great Slave Lake with GPS tracking and hazard alerts",
+  "name": "True North Navigator - Northern Waters Navigation",
+  "short_name": "TNN",
+  "description": "Community-powered navigation for safe passage across Northern Canadian waters. From Yellowknife to the Arctic - navigate with confidence.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f1c2e",
-  "theme_color": "#1a4d2e",
+  "background_color": "#0B1A2B",
+  "theme_color": "#2E8B8B",
   "orientation": "any",
-  "categories": ["navigation", "travel", "utilities"],
+  "categories": ["navigation", "travel", "utilities", "productivity"],
   "icons": [
     {
       "src": "/icon-72x72.png",
@@ -63,18 +63,56 @@
       "src": "/screenshot-mobile.png",
       "sizes": "540x720",
       "type": "image/png",
-      "form_factor": "narrow"
+      "form_factor": "narrow",
+      "label": "Map view with community tracks and hazard markers"
+    },
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Full dashboard with route analysis"
     }
   ],
   "features": [
-    "GPS Tracking",
-    "Offline Maps",
-    "Hazard Alerts",
-    "Background Sync"
+    "GPS Track Upload & Sharing",
+    "Offline Map Downloads",
+    "Real-time Hazard Alerts",
+    "Community Route Verification",
+    "AI-Powered Route Analysis",
+    "Multi-Region Support (NWT & Beyond)"
   ],
   "permissions": [
     "geolocation",
     "notifications",
     "background-sync"
+  ],
+  "scope": "/",
+  "lang": "en-CA",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "shortcuts": [
+    {
+      "name": "View Map",
+      "short_name": "Map",
+      "description": "Open interactive navigation map",
+      "url": "/",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Upload Track",
+      "short_name": "Upload",
+      "description": "Share your GPS track with the community",
+      "url": "/upload",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your tracks and community stats",
+      "url": "/dashboard",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    }
   ]
 }

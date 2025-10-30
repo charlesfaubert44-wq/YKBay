@@ -1,7 +1,7 @@
 {
   "name": "true-north-navigator",
   "version": "1.0.0",
-  "description": "Great Slave Lake Navigation App - Safe passage through GPS track crowdsourcing and AI route analysis",
+  "description": "True North Navigator - Community-powered navigation for Northern Canadian waters. Safe passage through GPS track crowdsourcing and AI route analysis.",
   "main": "server.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -18,8 +18,15 @@
     "gps",
     "mapping",
     "safety",
+    "boating",
     "yellowknife",
-    "great-slave-lake"
+    "great-slave-lake",
+    "nwt",
+    "northwest-territories",
+    "northern-canada",
+    "arctic",
+    "community",
+    "crowdsourcing"
   ],
   "author": "",
   "license": "MIT",

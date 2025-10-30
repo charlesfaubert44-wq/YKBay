@@ -1,6 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import Map, { Marker, Source, Layer, NavigationControl, GeolocateControl } from 'react-map-gl';
-import { Layers, AlertTriangle, Info, Navigation as NavIcon } from 'lucide-react';
+import { Layers, AlertTriangle, Info, Download, MapPin, Shield } from 'lucide-react';
+import GPSTrackingControl from '../components/GPSTrackingControl';
+import HazardAlertBanner from '../components/HazardAlertBanner';
+import OfflineMapManagerComponent from '../components/OfflineMapManager';
+import QuickHazardReport from '../components/QuickHazardReport';
+import gpsTracker from '../services/gpsTracker';
+import hazardAlert from '../services/hazardAlert';
+import { requestNotificationPermission } from '../services/serviceWorkerRegistration';
 
 // Great Slave Lake coordinates (Yellowknife Bay area)
 const INITIAL_VIEW_STATE = {
@@ -15,8 +22,67 @@ const MapView = () => {
   const [showHazards, setShowHazards] = useState(true);
   const [showOfficialRoutes, setShowOfficialRoutes] = useState(true);
   const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/satellite-streets-v12');
+  const [showOfflineMapManager, setShowOfflineMapManager] = useState(false);
+  const [showQuickReport, setShowQuickReport] = useState(false);
+  const [reportPosition, setReportPosition] = useState(null);
+  const [currentTrackLine, setCurrentTrackLine] = useState(null);
+  const [hazardAlertActive, setHazardAlertActive] = useState(false);
 
   const mapRef = useRef();
+
+  useEffect(() => {
+    // Request notification permission on mount
+    requestNotificationPermission();
+
+    // Start hazard alert service
+    hazardAlert.start({
+      verifiedOnly: false,
+      minConfidence: 0.5
+    });
+
+    setHazardAlertActive(true);
+
+    // Listen for GPS tracker position updates to draw track
+    const handleTrackerEvent = (event) => {
+      if (event.type === 'POSITION_UPDATE') {
+        const track = gpsTracker.getCurrentTrack();
+        if (track && track.positions.length > 1) {
+          // Create GeoJSON line from positions
+          const coordinates = track.positions.map(p => [p.longitude, p.latitude]);
+          setCurrentTrackLine({
+            type: 'Feature',
+            geometry: {
+              type: 'LineString',
+              coordinates
+            }
+          });
+        }
+      } else if (event.type === 'TRACKING_STOPPED') {
+        setCurrentTrackLine(null);
+      }
+    };
+
+    gpsTracker.addEventListener(handleTrackerEvent);
+
+    // Listen for hazard view requests
+    const handleViewHazard = (event) => {
+      const { lat, lng } = event.detail;
+      setViewState(prev => ({
+        ...prev,
+        latitude: lat,
+        longitude: lng,
+        zoom: 14
+      }));
+    };
+
+    window.addEventListener('viewHazard', handleViewHazard);
+
+    return () => {
+      gpsTracker.removeEventListener(handleTrackerEvent);
+      window.removeEventListener('viewHazard', handleViewHazard);
+      hazardAlert.stop();
+    };
+  }, []);
 
   // Sample track data (replace with actual data from API)
   const sampleTracks = {
@@ -42,6 +108,21 @@ const MapView = () => {
     { id: 1, lng: -114.3600, lat: 62.4570, type: 'reef', severity: 'high' },
     { id: 2, lng: -114.3400, lat: 62.4620, type: 'rock', severity: 'medium' }
   ];
+
+  const handleMapClick = (event) => {
+    // Long press or right-click to report hazard
+    if (event.originalEvent.button === 2 || event.originalEvent.type === 'contextmenu') {
+      event.preventDefault();
+      const { lngLat } = event;
+      setReportPosition({ lat: lngLat.lat, lng: lngLat.lng });
+      setShowQuickReport(true);
+    }
+  };
+
+  const handleHazardReported = () => {
+    // Reload hazards after reporting
+    hazardAlert.loadHazards();
+  };
 
   const heatmapLayer = {
     id: 'track-heatmap',
@@ -70,6 +151,8 @@ const MapView = () => {
         ref={mapRef}
         {...viewState}
         onMove={evt => setViewState(evt.viewState)}
+        onClick={handleMapClick}
+        onContextMenu={handleMapClick}
         mapStyle={mapStyle}
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN || 'YOUR_MAPBOX_TOKEN_HERE'}
         style={{ width: '100%', height: '100%' }}
@@ -82,6 +165,21 @@ const MapView = () => {
         {showHeatmap && (
           <Source id="tracks" type="geojson" data={sampleTracks}>
             <Layer {...heatmapLayer} />
+          </Source>
+        )}
+
+        {/* Current GPS Track (Live Recording) */}
+        {currentTrackLine && (
+          <Source id="current-track" type="geojson" data={currentTrackLine}>
+            <Layer
+              id="current-track-line"
+              type="line"
+              paint={{
+                'line-color': '#1a4d2e',
+                'line-width': 4,
+                'line-opacity': 0.9
+              }}
+            />
           </Source>
         )}
 
@@ -183,11 +281,80 @@ const MapView = () => {
         </div>
       )}
 
-      {/* Quick Action Button */}
-      <button className="absolute bottom-20 right-4 btn-primary flex items-center space-x-2 shadow-2xl">
-        <NavIcon size={20} />
-        <span>Start Navigation</span>
-      </button>
+      {/* Hazard Alert Banner */}
+      <HazardAlertBanner />
+
+      {/* GPS Tracking Control */}
+      <GPSTrackingControl />
+
+      {/* Mobile Action Buttons */}
+      <div className="absolute bottom-4 left-4 flex flex-col space-y-2">
+        {/* Quick Report Hazard */}
+        <button
+          onClick={() => {
+            const status = hazardAlert.getStatus();
+            if (status.currentPosition) {
+              setReportPosition(status.currentPosition);
+              setShowQuickReport(true);
+            } else {
+              alert('Waiting for GPS location...');
+            }
+          }}
+          className="btn-secondary flex items-center justify-center space-x-2 shadow-lg px-4 py-3"
+          title="Report Hazard"
+        >
+          <AlertTriangle size={20} />
+          <span className="hidden sm:inline">Report</span>
+        </button>
+
+        {/* Offline Maps */}
+        <button
+          onClick={() => setShowOfflineMapManager(true)}
+          className="btn-secondary flex items-center justify-center space-x-2 shadow-lg px-4 py-3"
+          title="Offline Maps"
+        >
+          <Download size={20} />
+          <span className="hidden sm:inline">Offline</span>
+        </button>
+
+        {/* Hazard Alert Toggle */}
+        <button
+          onClick={() => {
+            if (hazardAlertActive) {
+              hazardAlert.stop();
+              setHazardAlertActive(false);
+            } else {
+              hazardAlert.start();
+              setHazardAlertActive(true);
+            }
+          }}
+          className={`flex items-center justify-center space-x-2 shadow-lg px-4 py-3 rounded-lg transition-all ${
+            hazardAlertActive
+              ? 'bg-aurora-green text-white hover:bg-aurora-green/80'
+              : 'btn-secondary'
+          }`}
+          title="Toggle Hazard Alerts"
+        >
+          <Shield size={20} />
+          <span className="hidden sm:inline">
+            {hazardAlertActive ? 'Alerts On' : 'Alerts Off'}
+          </span>
+        </button>
+      </div>
+
+      {/* Offline Map Manager Modal */}
+      {showOfflineMapManager && (
+        <OfflineMapManagerComponent onClose={() => setShowOfflineMapManager(false)} />
+      )}
+
+      {/* Quick Hazard Report Modal */}
+      {showQuickReport && reportPosition && (
+        <QuickHazardReport
+          position={reportPosition}
+          onClose={() => setShowQuickReport(false)}
+          onReported={handleHazardReported}
+        />
+      )}
     </div>
   );
 };

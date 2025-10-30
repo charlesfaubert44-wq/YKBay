@@ -198,4 +198,83 @@ router.put('/:id/verify', authenticateToken, async (req, res) => {
   }
 });
 
+/**
+ * POST /api/hazards/sync
+ * Sync hazard report from mobile device (background sync endpoint)
+ */
+router.post('/sync', authenticateToken, async (req, res) => {
+  try {
+    const hazardData = req.body.data || req.body;
+
+    // Validate hazard data
+    if (!hazardData.lat || !hazardData.lng || !hazardData.type) {
+      return res.status(400).json({
+        error: 'Latitude, longitude, and type are required'
+      });
+    }
+
+    // Check if similar hazard exists nearby (within 50 meters)
+    const existingCheck = await db.query(
+      `SELECT id, report_count
+       FROM hazards
+       WHERE ST_DWithin(
+         location::geography,
+         ST_SetSRID(ST_MakePoint($1, $2), 4326)::geography,
+         50
+       )
+       AND type = $3
+       LIMIT 1`,
+      [hazardData.lng, hazardData.lat, hazardData.type]
+    );
+
+    if (existingCheck.rows.length > 0) {
+      // Add report to existing hazard
+      const existingHazard = existingCheck.rows[0];
+
+      await db.query(
+        `INSERT INTO hazard_reports (hazard_id, user_id, description)
+         VALUES ($1, $2, $3)`,
+        [existingHazard.id, req.user.id, hazardData.description || null]
+      );
+
+      await db.query(
+        'UPDATE hazards SET report_count = report_count + 1 WHERE id = $1',
+        [existingHazard.id]
+      );
+
+      return res.json({
+        success: true,
+        message: 'Report added to existing hazard',
+        hazardId: existingHazard.id,
+        merged: true
+      });
+    }
+
+    // Create new hazard
+    const result = await db.query(
+      `INSERT INTO hazards (
+        type, severity, location, reported_by, description
+      ) VALUES ($1, $2, ST_SetSRID(ST_MakePoint($3, $4), 4326), $5, $6)
+      RETURNING id, hazard_uuid, created_at`,
+      [
+        hazardData.type,
+        hazardData.severity || 'medium',
+        hazardData.lng,
+        hazardData.lat,
+        req.user.id,
+        hazardData.description || null
+      ]
+    );
+
+    res.json({
+      success: true,
+      hazard: result.rows[0],
+      merged: false
+    });
+  } catch (error) {
+    console.error('Hazard sync error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

@@ -51,11 +51,16 @@ export default {
       animation: {
         'aurora-wave': 'aurora 8s ease-in-out infinite',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'slide-in-right': 'slideInRight 0.3s ease-out',
       },
       keyframes: {
         aurora: {
           '0%, 100%': { transform: 'translateY(0) translateX(0)', opacity: '0.8' },
           '50%': { transform: 'translateY(-10px) translateX(10px)', opacity: '1' },
+        },
+        slideInRight: {
+          '0%': { transform: 'translateX(100%)', opacity: '0' },
+          '100%': { transform: 'translateX(0)', opacity: '1' },
         },
       },
     },

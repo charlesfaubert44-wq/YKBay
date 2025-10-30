@@ -300,4 +300,74 @@ router.delete('/:id', authenticateToken, async (req, res) => {
   }
 });
 
+/**
+ * POST /api/tracks/sync
+ * Sync track from mobile device (background sync endpoint)
+ */
+router.post('/sync', authenticateToken, async (req, res) => {
+  try {
+    const trackData = req.body.data || req.body;
+
+    // Validate track data
+    if (!trackData.positions || trackData.positions.length === 0) {
+      return res.status(400).json({ error: 'No track positions provided' });
+    }
+
+    // Convert positions to GeoJSON LineString
+    const coordinates = trackData.positions.map(p => [p.longitude, p.latitude]);
+    const geometry = {
+      type: 'LineString',
+      coordinates
+    };
+
+    // Calculate statistics if not provided
+    const stats = trackData.statistics || {
+      distance: 0,
+      duration: 0,
+      avgSpeed: 0,
+      maxSpeed: 0,
+      pointCount: coordinates.length
+    };
+
+    // Insert track
+    const result = await db.query(
+      `INSERT INTO tracks (
+        user_id, vessel_type, vessel_draft, water_level,
+        wind_speed, wave_height, visibility, geometry,
+        distance_km, duration_seconds, avg_speed_kmh,
+        point_count, privacy, notes
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, ST_GeomFromGeoJSON($8), $9, $10, $11, $12, $13, $14)
+      RETURNING id, track_uuid, upload_date`,
+      [
+        req.user.id,
+        trackData.metadata?.vesselType || null,
+        trackData.metadata?.vesselDraft || null,
+        trackData.metadata?.waterLevel || null,
+        trackData.metadata?.windSpeed || null,
+        trackData.metadata?.waveHeight || null,
+        trackData.metadata?.visibility || 'good',
+        JSON.stringify(geometry),
+        stats.distance || 0,
+        Math.floor((stats.duration || 0) / 1000), // Convert ms to seconds
+        stats.avgSpeed || 0,
+        stats.pointCount || coordinates.length,
+        'public',
+        trackData.metadata?.notes || null
+      ]
+    );
+
+    res.json({
+      success: true,
+      track: {
+        id: result.rows[0].id,
+        uuid: result.rows[0].track_uuid,
+        uploadDate: result.rows[0].upload_date
+      }
+    });
+  } catch (error) {
+    console.error('Track sync error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

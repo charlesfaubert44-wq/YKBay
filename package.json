@@ -1,0 +1,46 @@
+{
+  "name": "true-north-navigator",
+  "version": "1.0.0",
+  "description": "Great Slave Lake Navigation App - Safe passage through GPS track crowdsourcing and AI route analysis",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/server.js",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "node server/server.js",
+    "db:setup": "node server/scripts/setupDatabase.js",
+    "db:setup-sqlite": "node server/scripts/setupDatabase-sqlite.js",
+    "quickstart": "npm install && npm run db:setup-sqlite && npm run dev"
+  },
+  "keywords": [
+    "navigation",
+    "gps",
+    "mapping",
+    "safety",
+    "yellowknife",
+    "great-slave-lake"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@turf/turf": "^6.5.0",
+    "bcrypt": "^5.1.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.11.3",
+    "sqlite3": "^5.1.7",
+    "turf": "^3.0.14",
+    "uuid": "^9.0.1",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.2"
+  }
+}

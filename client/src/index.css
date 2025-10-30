@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Mapbox GL CSS */
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+/* Northern Theme Base Styles */
+@layer base {
+  :root {
+    --aurora-green: #1a4d2e;
+    --ice-blue: #c8e6f5;
+    --midnight-blue: #0f1c2e;
+    --tundra-gold: #d4a574;
+  }
+
+  * {
+    @apply border-ice-blue/20;
+  }
+
+  body {
+    @apply bg-midnight-blue text-ice-white antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
+  }
+}
+
+/* Custom Components */
+@layer components {
+  /* Aurora Effect Header */
+  .aurora-header {
+    @apply bg-aurora-gradient relative overflow-hidden;
+  }
+
+  .aurora-header::before {
+    content: '';
+    @apply absolute inset-0 opacity-30;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    animation: aurora 8s ease-in-out infinite;
+  }
+
+  /* Northern Button Styles */
+  .btn-primary {
+    @apply px-6 py-3 bg-aurora-green hover:bg-aurora-green/90 text-ice-white
+           rounded-lg font-semibold transition-all duration-200
+           shadow-lg hover:shadow-aurora active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-midnight-blue hover:bg-midnight-blue/80 text-ice-blue
+           border border-ice-blue/30 rounded-lg font-semibold
+           transition-all duration-200 hover:border-ice-blue/60;
+  }
+
+  .btn-danger {
+    @apply px-6 py-3 bg-safety-red hover:bg-safety-red/90 text-ice-white
+           rounded-lg font-semibold transition-all duration-200
+           shadow-lg active:scale-95;
+  }
+
+  /* Card Styles with Northern Aesthetic */
+  .card {
+    @apply bg-midnight-blue/80 backdrop-blur-sm border border-ice-blue/20
+           rounded-xl p-6 shadow-xl;
+  }
+
+  .card-glass {
+    @apply bg-ice-white/5 backdrop-blur-md border border-ice-blue/10
+           rounded-xl p-6 shadow-2xl;
+  }
+
+  /* Input Styles */
+  .input-northern {
+    @apply w-full px-4 py-3 bg-midnight-dark border border-ice-blue/30
+           rounded-lg text-ice-white placeholder-ice-blue/50
+           focus:outline-none focus:border-aurora-blue focus:ring-2 focus:ring-aurora-blue/20
+           transition-all duration-200;
+  }
+
+  /* Badge Styles */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-success {
+    @apply badge bg-forest-green/20 text-forest-green border border-forest-green/30;
+  }
+
+  .badge-warning {
+    @apply badge bg-tundra-gold/20 text-tundra-gold border border-tundra-gold/30;
+  }
+
+  .badge-danger {
+    @apply badge bg-safety-red/20 text-safety-red border border-safety-red/30;
+  }
+
+  .badge-info {
+    @apply badge bg-aurora-blue/20 text-aurora-blue border border-aurora-blue/30;
+  }
+
+  /* Loading Spinner with Aurora Effect */
+  .spinner-aurora {
+    @apply inline-block w-8 h-8 border-4 border-ice-blue/20 border-t-aurora-purple
+           rounded-full animate-spin;
+  }
+
+  /* Inukshuk-inspired Icon Container */
+  .icon-container {
+    @apply w-12 h-12 flex items-center justify-center
+           bg-aurora-gradient rounded-lg shadow-aurora;
+  }
+
+  /* Map Control Buttons */
+  .map-control-btn {
+    @apply p-3 bg-ice-white text-midnight-blue rounded-lg shadow-lg
+           hover:bg-ice-blue transition-all duration-200
+           active:scale-95 touch-manipulation;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Track Heatmap Legend */
+  .heatmap-legend {
+    @apply absolute bottom-6 right-6 bg-midnight-blue/90 backdrop-blur-sm
+           border border-ice-blue/20 rounded-lg p-4 text-sm;
+  }
+
+  /* Hazard Marker Pulse */
+  .hazard-marker {
+    @apply absolute w-8 h-8 rounded-full bg-safety-red animate-ping opacity-75;
+  }
+
+  /* Northern Lights Divider */
+  .aurora-divider {
+    @apply h-1 bg-aurora-gradient rounded-full;
+  }
+
+  /* Toast Notification */
+  .toast {
+    @apply fixed top-4 right-4 max-w-md p-4 rounded-lg shadow-2xl
+           bg-midnight-blue border border-ice-blue/20 text-ice-white
+           animate-slide-in-right;
+  }
+}
+
+/* Utility Classes */
+@layer utilities {
+  .text-shadow-aurora {
+    text-shadow: 0 2px 10px rgba(122, 45, 142, 0.5);
+  }
+
+  .glass-effect {
+    @apply bg-ice-white/5 backdrop-blur-md;
+  }
+
+  /* Touch-Friendly Sizing for Marine Use */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* High Contrast for Sunlight Visibility */
+  .high-contrast {
+    @apply text-ice-white bg-midnight-dark;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Animations */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Mapbox Overrides for Northern Theme */
+.mapboxgl-ctrl-group {
+  @apply bg-midnight-blue/90 backdrop-blur-sm border border-ice-blue/20 rounded-lg overflow-hidden;
+}
+
+.mapboxgl-ctrl-group button {
+  @apply bg-transparent text-ice-white hover:bg-aurora-green/20 transition-colors;
+}
+
+.mapboxgl-popup-content {
+  @apply bg-midnight-blue text-ice-white border border-ice-blue/20 rounded-lg shadow-2xl;
+}
+
+.mapboxgl-popup-close-button {
+  @apply text-ice-white hover:text-tundra-gold;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-midnight-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-aurora-green/50 rounded-full hover:bg-aurora-green/70;
+}
+
+/* Print Styles for Float Plans */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    @apply bg-white text-black;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .card {
+    @apply p-4;
+  }
+
+  .btn-primary, .btn-secondary {
+    @apply py-4 text-lg;
+  }
+}

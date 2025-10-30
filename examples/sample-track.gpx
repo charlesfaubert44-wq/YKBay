@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="True North Navigator" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>Yellowknife Bay to Blanchet Island Sample Route</name>
+    <desc>Sample GPS track for testing True North Navigator</desc>
+    <author>
+      <name>True North Navigator</name>
+    </author>
+    <time>2025-10-15T10:30:00Z</time>
+  </metadata>
+
+  <trk>
+    <name>Yellowknife Bay to Blanchet Island</name>
+    <desc>Safe passage route avoiding shallow reefs</desc>
+    <trkseg>
+      <trkpt lat="62.4540" lon="-114.3718">
+        <ele>156.2</ele>
+        <time>2025-10-15T10:30:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4550" lon="-114.3700">
+        <ele>156.3</ele>
+        <time>2025-10-15T10:32:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4560" lon="-114.3680">
+        <ele>156.4</ele>
+        <time>2025-10-15T10:34:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4580" lon="-114.3650">
+        <ele>156.5</ele>
+        <time>2025-10-15T10:36:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4600" lon="-114.3600">
+        <ele>156.6</ele>
+        <time>2025-10-15T10:38:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4620" lon="-114.3550">
+        <ele>156.7</ele>
+        <time>2025-10-15T10:40:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4640" lon="-114.3480">
+        <ele>156.8</ele>
+        <time>2025-10-15T10:42:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4650" lon="-114.3400">
+        <ele>156.9</ele>
+        <time>2025-10-15T10:44:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4660" lon="-114.3350">
+        <ele>157.0</ele>
+        <time>2025-10-15T10:46:00Z</time>
+      </trkpt>
+      <trkpt lat="62.4670" lon="-114.3300">
+        <ele>157.1</ele>
+        <time>2025-10-15T10:48:00Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+
+  <wpt lat="62.4590" lon="-114.3620">
+    <name>Reef Warning</name>
+    <desc>Shallow reef visible at low water - stay west</desc>
+    <sym>Danger</sym>
+  </wpt>
+
+  <wpt lat="62.4630" lon="-114.3500">
+    <name>Safe Channel Marker</name>
+    <desc>Deep channel - safe at all water levels</desc>
+    <sym>Safety</sym>
+  </wpt>
+</gpx>

@@ -49,12 +49,16 @@ const trackRoutes = require('./routes/tracks');
 const hazardRoutes = require('./routes/hazards');
 const routeRoutes = require('./routes/routes');
 const userRoutes = require('./routes/users');
+const tripRoutes = require('./routes/trips');
+const activityRoutes = require('./routes/activities');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tracks', trackRoutes);
 app.use('/api/hazards', hazardRoutes);
 app.use('/api/routes', routeRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/trips', tripRoutes);
+app.use('/api/activities', activityRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -89,7 +93,7 @@ app.use((req, res) => {
 // Start server with error handling
 const HOST = process.env.HOST || '0.0.0.0'; // Listen on all network interfaces
 const server = app.listen(PORT, HOST, () => {
-  console.log(`\n🚢 True North Navigator API Server`);
+  console.log(`\n🛡️ FrozenShield API Server`);
   console.log(`📍 Local:   http://localhost:${PORT}`);
   console.log(`📍 Network: http://192.168.86.35:${PORT}`);
   console.log(`⏰ Started at ${new Date().toLocaleString()}\n`);

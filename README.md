@@ -1,28 +1,29 @@
-# True North Navigator
+# FrozenShield
 
-**Community-Guided Waters of the North**
+**Plan. Protect. Explore the North.**
 
-A community-powered navigation platform for safe passage across Northern Canadian waters. Built by boaters in Yellowknife and designed to scale across all Northwest Territories and Arctic regions, we combine modern technology with traditional knowledge sharing to keep Northern communities safe on the water.
+All-season outdoor trip planning and safety platform for Northern Canada. Supporting boating, snowmobiling, hiking, camping, and more outdoor activities across the Northwest Territories and beyond. FrozenShield combines comprehensive trip planning with emergency preparedness to keep adventurers safe year-round.
 
-![Version](https://img.shields.io/badge/version-1.0.0-2E8B8B)
+![Version](https://img.shields.io/badge/version-2.0.0-2E8B8B)
 ![License](https://img.shields.io/badge/license-MIT-0B1A2B)
 ![Platform](https://img.shields.io/badge/platform-Web%20%7C%20iOS%20%7C%20Android-4CAF6D)
+![Activities](https://img.shields.io/badge/activities-16+-aurora)
 
 ---
 
-## About True North Navigator
+## About FrozenShield
 
-True North Navigator is more than a navigation app—it's a community safety network. Starting in Yellowknife Bay and expanding across Great Slave Lake, the platform empowers boaters to share GPS tracks, report hazards, and access verified routes even in areas without cell service.
+FrozenShield is your comprehensive outdoor trip planning companion for Northern Canada. From summer boating on Great Slave Lake to winter snowmobiling across the tundra, we help you plan, document, and share your adventures safely. Every trip includes emergency contacts, equipment checklists, and the ability to export and email plans to ensure someone always knows your whereabouts.
 
 ### Our Mission
-To provide free, community-driven navigation tools that honor Northern traditions of knowledge sharing while leveraging modern technology for safer waters from Yellowknife to the Arctic.
+To empower Northern adventurers with comprehensive trip planning tools that prioritize safety, preparedness, and community knowledge sharing across all seasons and activities.
 
 ### Core Values
-- **Safety First** - Every feature prioritizes boater safety
-- **Community Trust** - Built by and for Northern communities
-- **Cultural Respect** - Honors Indigenous heritage and traditional knowledge
-- **Reliability** - Works offline in the most remote locations
-- **Inclusivity** - Accessible to all skill levels and backgrounds
+- **Safety First** - Emergency preparedness is paramount
+- **All-Season Support** - Year-round outdoor activities
+- **Community Knowledge** - Share routes and experiences
+- **Offline Ready** - Works in remote locations
+- **Comprehensive Planning** - From equipment to emergency contacts
 
 ---
 

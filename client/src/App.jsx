@@ -3,6 +3,9 @@ import MapView from './pages/MapView';
 import Dashboard from './pages/Dashboard';
 import UploadTrack from './pages/UploadTrack';
 import Login from './pages/Login';
+import TripPlanner from './pages/TripPlanner';
+import MyTrips from './pages/MyTrips';
+import TripDetails from './pages/TripDetails';
 import Navigation from './components/Navigation';
 import ErrorBoundary from './components/ErrorBoundary';
 import { AuthProvider } from './contexts/AuthContext';
@@ -24,6 +27,10 @@ function App() {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/upload" element={<UploadTrack />} />
                   <Route path="/login" element={<Login />} />
+                  <Route path="/trip-planner" element={<TripPlanner />} />
+                  <Route path="/my-trips" element={<MyTrips />} />
+                  <Route path="/trip/:id" element={<TripDetails />} />
+                  <Route path="/trip/:id/edit" element={<TripPlanner />} />
                 </Routes>
               </div>
             </Router>

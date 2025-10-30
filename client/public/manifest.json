@@ -1,7 +1,7 @@
 {
-  "name": "True North Navigator - Northern Waters Navigation",
-  "short_name": "TNN",
-  "description": "Community-powered navigation for safe passage across Northern Canadian waters. From Yellowknife to the Arctic - navigate with confidence.",
+  "name": "FrozenShield - Plan. Protect. Explore the North",
+  "short_name": "FZS",
+  "description": "All-season outdoor trip planning and safety platform for Northern Canada. Plan, share, and track your adventures - boating, snowmobiling, hiking, and more.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0B1A2B",
@@ -80,12 +80,15 @@
     }
   ],
   "features": [
+    "Multi-Activity Trip Planning",
+    "PDF Export & Email Sharing",
     "GPS Track Upload & Sharing",
     "Offline Map Downloads",
     "Real-time Hazard Alerts",
-    "Community Route Verification",
-    "AI-Powered Route Analysis",
-    "Multi-Region Support (NWT & Beyond)"
+    "Emergency Contact Management",
+    "Equipment Checklists",
+    "Weather Integration",
+    "All-Season Support"
   ],
   "permissions": [
     "geolocation",
@@ -99,6 +102,30 @@
   "related_applications": [],
   "shortcuts": [
     {
+      "name": "Plan Trip",
+      "short_name": "Plan",
+      "description": "Create a new outdoor trip plan",
+      "url": "/trip-planner",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "My Trips",
+      "short_name": "Trips",
+      "description": "View and manage your trip plans",
+      "url": "/my-trips",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
       "name": "View Map",
       "short_name": "Map",
       "description": "Open interactive navigation map",
@@ -111,21 +138,9 @@
       ]
     },
     {
-      "name": "Upload Track",
-      "short_name": "Upload",
-      "description": "Share your GPS track with the community",
-      "url": "/upload",
-      "icons": [
-        {
-          "src": "/icon-192x192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
       "name": "Dashboard",
       "short_name": "Dashboard",
-      "description": "View your tracks and community stats",
+      "description": "View your activities and stats",
       "url": "/dashboard",
       "icons": [
         {

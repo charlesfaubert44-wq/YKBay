@@ -1,7 +1,7 @@
 {
-  "name": "true-north-navigator",
-  "version": "1.0.0",
-  "description": "True North Navigator - Community-powered navigation for Northern Canadian waters. Safe passage through GPS track crowdsourcing and AI route analysis.",
+  "name": "frozenshield",
+  "version": "2.0.0",
+  "description": "FrozenShield - Plan. Protect. Explore the North. All-season outdoor trip planning and safety platform for Northern Canada supporting boating, snowmobiling, hiking, and more.",
   "main": "server.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -14,11 +14,16 @@
     "quickstart": "npm install && npm run db:setup-sqlite && npm run dev"
   },
   "keywords": [
+    "outdoor",
+    "trip-planning",
     "navigation",
     "gps",
     "mapping",
     "safety",
     "boating",
+    "snowmobiling",
+    "hiking",
+    "camping",
     "yellowknife",
     "great-slave-lake",
     "nwt",
@@ -26,7 +31,7 @@
     "northern-canada",
     "arctic",
     "community",
-    "crowdsourcing"
+    "emergency-preparedness"
   ],
   "author": "",
   "license": "MIT",
@@ -45,7 +50,10 @@
     "sqlite3": "^5.1.7",
     "turf": "^3.0.14",
     "uuid": "^9.0.1",
-    "xml2js": "^0.6.2"
+    "xml2js": "^0.6.2",
+    "pdfkit": "^0.14.0",
+    "nodemailer": "^6.9.0",
+    "moment-timezone": "^0.5.43"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

@@ -36,20 +36,22 @@ const Navigation = () => {
           >
             <img
               src="/logo-primary.svg"
-              alt="True North Navigator"
+              alt="FrozenShield"
               className="h-8 w-8 group-hover:scale-110 transition-transform"
             />
             <span className="font-display text-xl font-bold text-shadow-aurora hidden sm:block">
-              True North Navigator
+              FrozenShield
             </span>
             <span className="text-xs font-medium text-aurora-teal bg-aurora-teal/10 px-2 py-0.5 rounded-full hidden lg:inline">
-              TNN
+              FZS
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             <NavLink to="/" icon={Map} label="Map" active={isActive('/')} />
+            <NavLink to="/trip-planner" icon={Mountain} label="Plan Trip" active={isActive('/trip-planner')} />
+            <NavLink to="/my-trips" icon={LayoutDashboard} label="My Trips" active={isActive('/my-trips')} />
             <NavLink to="/dashboard" icon={LayoutDashboard} label="Dashboard" active={isActive('/dashboard')} />
             <NavLink to="/upload" icon={Upload} label="Upload Track" active={isActive('/upload')} />
 
@@ -117,6 +119,8 @@ const Navigation = () => {
           <div className="md:hidden pb-4 animate-slideUp">
             <div className="flex flex-col space-y-2">
               <NavLink to="/" icon={Map} label="Map" active={isActive('/')} mobile onClick={closeMobileMenu} />
+              <NavLink to="/trip-planner" icon={Mountain} label="Plan Trip" active={isActive('/trip-planner')} mobile onClick={closeMobileMenu} />
+              <NavLink to="/my-trips" icon={LayoutDashboard} label="My Trips" active={isActive('/my-trips')} mobile onClick={closeMobileMenu} />
               <NavLink to="/dashboard" icon={LayoutDashboard} label="Dashboard" active={isActive('/dashboard')} mobile onClick={closeMobileMenu} />
               <NavLink to="/upload" icon={Upload} label="Upload Track" active={isActive('/upload')} mobile onClick={closeMobileMenu} />
 

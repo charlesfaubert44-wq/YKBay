@@ -60,11 +60,44 @@ app.use((req, res) => {
   });
 });
 
-// Start server
-app.listen(PORT, () => {
+// Start server with error handling
+const server = app.listen(PORT, () => {
   console.log(`\n🚢 True North Navigator API Server`);
   console.log(`📍 Running on http://localhost:${PORT}`);
   console.log(`⏰ Started at ${new Date().toLocaleString()}\n`);
+});
+
+// Handle port already in use error
+server.on('error', (error) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(`\n❌ Error: Port ${PORT} is already in use.`);
+    console.error(`\n💡 Solutions:`);
+    console.error(`   1. Kill the process using the port:`);
+    console.error(`      Windows: cmd //c "for /f "tokens=5" %a in ('netstat -ano ^| findstr :${PORT}') do taskkill /PID %a /F"`);
+    console.error(`      Linux/Mac: lsof -ti:${PORT} | xargs kill -9`);
+    console.error(`   2. Change the PORT in your .env file\n`);
+    process.exit(1);
+  } else {
+    console.error(`\n❌ Server error:`, error);
+    process.exit(1);
+  }
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('\n🛑 SIGTERM signal received: closing HTTP server');
+  server.close(() => {
+    console.log('✅ HTTP server closed');
+    process.exit(0);
+  });
+});
+
+process.on('SIGINT', () => {
+  console.log('\n\n🛑 SIGINT signal received: closing HTTP server');
+  server.close(() => {
+    console.log('✅ HTTP server closed');
+    process.exit(0);
+  });
 });
 
 module.exports = app;

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unregister Service Worker - YK Bay</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a4d2e 0%, #0f1c2e 100%);
+      color: #c8e6f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(15, 28, 46, 0.9);
+      border: 2px solid rgba(200, 230, 245, 0.2);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    h1 {
+      color: #c8e6f5;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    p {
+      color: #c8e6f5;
+      opacity: 0.8;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    #status {
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-weight: 500;
+    }
+    .success {
+      background: rgba(45, 80, 22, 0.3);
+      border: 1px solid #2d5016;
+      color: #7dd957;
+    }
+    .error {
+      background: rgba(200, 62, 62, 0.3);
+      border: 1px solid #c83e3e;
+      color: #ff6b6b;
+    }
+    .info {
+      background: rgba(74, 144, 164, 0.3);
+      border: 1px solid #4a90a4;
+      color: #7ec8e3;
+    }
+    button {
+      background: linear-gradient(135deg, #1a4d2e 0%, #2d5016 100%);
+      color: #c8e6f5;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 10px;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(26, 77, 46, 0.5);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .secondary {
+      background: transparent;
+      border: 2px solid rgba(200, 230, 245, 0.3);
+    }
+    .secondary:hover {
+      background: rgba(200, 230, 245, 0.1);
+      border-color: rgba(200, 230, 245, 0.5);
+    }
+    .icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">🧹</div>
+    <h1>Service Worker Cleanup</h1>
+    <p>This page will unregister all service workers and clear the cache to fix CSS loading issues.</p>
+
+    <div id="status" class="info">
+      Click the button below to start
+    </div>
+
+    <button onclick="unregisterServiceWorkers()">
+      🗑️ Unregister Service Workers
+    </button>
+    <button onclick="clearAllCache()" class="secondary">
+      💾 Clear All Cache
+    </button>
+    <button onclick="goToApp()" class="secondary">
+      🏠 Back to App
+    </button>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+
+    function updateStatus(message, type = 'info') {
+      statusEl.textContent = message;
+      statusEl.className = type;
+    }
+
+    async function unregisterServiceWorkers() {
+      updateStatus('🔍 Checking for service workers...', 'info');
+
+      if (!('serviceWorker' in navigator)) {
+        updateStatus('❌ Service workers not supported in this browser', 'error');
+        return;
+      }
+
+      try {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+
+        if (registrations.length === 0) {
+          updateStatus('✅ No service workers found - already clean!', 'success');
+          return;
+        }
+
+        updateStatus(`🗑️ Unregistering ${registrations.length} service worker(s)...`, 'info');
+
+        for (let registration of registrations) {
+          await registration.unregister();
+          console.log('Service Worker unregistered:', registration.scope);
+        }
+
+        updateStatus(`✅ Successfully unregistered ${registrations.length} service worker(s)!`, 'success');
+
+        setTimeout(() => {
+          updateStatus('♻️ Reloading page to apply changes...', 'info');
+          setTimeout(() => location.reload(true), 1000);
+        }, 2000);
+
+      } catch (error) {
+        console.error('Error unregistering service workers:', error);
+        updateStatus('❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    async function clearAllCache() {
+      updateStatus('🧹 Clearing cache...', 'info');
+
+      try {
+        // Clear Cache Storage API
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          await Promise.all(cacheNames.map(name => caches.delete(name)));
+          console.log('Cleared', cacheNames.length, 'caches');
+        }
+
+        // Clear localStorage
+        localStorage.clear();
+        sessionStorage.clear();
+
+        updateStatus('✅ Cache cleared successfully!', 'success');
+
+        setTimeout(() => {
+          updateStatus('♻️ Reloading page...', 'info');
+          setTimeout(() => location.reload(true), 1000);
+        }, 2000);
+
+      } catch (error) {
+        console.error('Error clearing cache:', error);
+        updateStatus('❌ Error: ' + error.message, 'error');
+      }
+    }
+
+    function goToApp() {
+      window.location.href = '/';
+    }
+
+    // Auto-run on page load (optional)
+    // setTimeout(() => unregisterServiceWorkers(), 1000);
+  </script>
+</body>
+</html>

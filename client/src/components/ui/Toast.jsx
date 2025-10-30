@@ -15,27 +15,27 @@ const Toast = ({ message, type = 'info', duration = 5000, onClose, id }) => {
   const types = {
     success: {
       icon: CheckCircle,
-      bg: 'bg-forest-green/90',
-      border: 'border-forest-green',
-      iconColor: 'text-green-300',
+      bg: 'bg-safety-success/90',
+      border: 'border-safety-success',
+      iconColor: 'text-safety-success',
     },
     error: {
       icon: AlertCircle,
-      bg: 'bg-safety-red/90',
-      border: 'border-safety-red',
-      iconColor: 'text-red-300',
+      bg: 'bg-safety-critical/90',
+      border: 'border-safety-critical',
+      iconColor: 'text-safety-critical',
     },
     warning: {
       icon: AlertTriangle,
-      bg: 'bg-safety-orange/90',
-      border: 'border-safety-orange',
-      iconColor: 'text-orange-300',
+      bg: 'bg-safety-warning/90',
+      border: 'border-safety-warning',
+      iconColor: 'text-safety-warning',
     },
     info: {
       icon: Info,
       bg: 'bg-aurora-blue/90',
       border: 'border-aurora-blue',
-      iconColor: 'text-blue-300',
+      iconColor: 'text-aurora-blue',
     },
   };
 
@@ -44,14 +44,14 @@ const Toast = ({ message, type = 'info', duration = 5000, onClose, id }) => {
 
   return (
     <div
-      className={`flex items-center gap-3 ${config.bg} ${config.border} border-l-4 backdrop-blur-md rounded-lg shadow-2xl p-4 min-w-[320px] max-w-md animate-slideInRight`}
+      className={`flex items-center gap-3 ${config.bg} ${config.border} border-l-4 backdrop-blur-md rounded-button shadow-elevation-3 p-4 min-w-[320px] max-w-md animate-slideInRight`}
       role="alert"
     >
       <Icon className={`w-5 h-5 flex-shrink-0 ${config.iconColor}`} />
-      <p className="flex-1 text-ice-white font-medium">{message}</p>
+      <p className="flex-1 text-frost-white font-medium">{message}</p>
       <button
         onClick={() => onClose(id)}
-        className="flex-shrink-0 p-1 text-ice-white/70 hover:text-ice-white hover:bg-ice-white/10 rounded transition-colors duration-200"
+        className="flex-shrink-0 p-1 text-frost-white/70 hover:text-frost-white hover:bg-frost-white/10 rounded transition-colors duration-200 touch-target"
         aria-label="Close notification"
       >
         <X className="w-4 h-4" />

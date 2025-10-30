@@ -60,24 +60,24 @@ const Modal = ({
       onClick={handleOverlayClick}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-midnight-dark/80 backdrop-blur-sm animate-fadeIn" />
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn" />
 
       {/* Modal */}
       <div
-        className={`relative bg-midnight-blue border-2 border-aurora-blue/30 rounded-2xl shadow-2xl w-full ${sizes[size]} ${className} animate-slideUp overflow-hidden`}
+        className={`relative bg-midnight-navy border-2 border-aurora-teal/30 rounded-modal shadow-elevation-3 w-full ${sizes[size]} ${className} animate-slideUp overflow-hidden`}
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between p-6 border-b border-ice-blue/20">
+          <div className="flex items-center justify-between p-6 border-b border-arctic-ice/20">
             {title && (
-              <h2 className="text-2xl font-display font-bold text-ice-white">
+              <h2 className="text-2xl font-display font-bold text-frost-white">
                 {title}
               </h2>
             )}
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="p-2 text-ice-blue hover:text-ice-white hover:bg-ice-white/10 rounded-lg transition-all duration-200"
+                className="p-2 text-arctic-ice hover:text-aurora-teal hover:bg-aurora-teal/10 rounded-button transition-all duration-200 touch-target"
                 aria-label="Close modal"
               >
                 <X className="w-6 h-6" />
@@ -93,7 +93,7 @@ const Modal = ({
 
         {/* Footer */}
         {footer && (
-          <div className="flex items-center justify-end gap-3 p-6 border-t border-ice-blue/20 bg-midnight-dark/50">
+          <div className="flex items-center justify-end gap-3 p-6 border-t border-arctic-ice/20 bg-midnight-navy/80">
             {footer}
           </div>
         )}

@@ -8,14 +8,14 @@ const Card = ({
   padding = 'md',
   ...props
 }) => {
-  const baseStyles = 'rounded-xl transition-all duration-300';
+  const baseStyles = 'rounded-card transition-all duration-300';
 
   const variants = {
-    default: 'bg-midnight-blue/90 border border-ice-blue/20 shadow-lg backdrop-blur-sm',
-    glass: 'bg-ice-white/5 border border-ice-white/10 shadow-xl backdrop-blur-md',
-    aurora: 'bg-gradient-to-br from-aurora-green/10 via-aurora-purple/10 to-aurora-blue/10 border border-aurora-blue/30 shadow-aurora backdrop-blur-sm',
-    solid: 'bg-midnight-dark border border-ice-blue/30 shadow-lg',
-    elevated: 'bg-midnight-blue/95 border border-ice-blue/20 shadow-2xl backdrop-blur-md',
+    default: 'bg-midnight-navy/90 border border-aurora-teal/20 shadow-elevation-2 backdrop-blur-sm',
+    glass: 'bg-frost-white/5 border border-frost-white/10 shadow-elevation-3 backdrop-blur-md',
+    aurora: 'bg-gradient-to-br from-aurora-teal/10 via-aurora-purple/10 to-aurora-blue/10 border border-aurora-teal/30 shadow-aurora backdrop-blur-sm',
+    solid: 'bg-midnight-navy border border-arctic-ice/30 shadow-elevation-2',
+    elevated: 'bg-midnight-navy/95 border border-aurora-teal/20 shadow-elevation-3 backdrop-blur-md',
   };
 
   const paddings = {
@@ -27,7 +27,7 @@ const Card = ({
   };
 
   const hoverStyles = hover
-    ? 'hover:shadow-2xl hover:scale-[1.02] hover:border-aurora-blue/50 cursor-pointer'
+    ? 'hover:shadow-elevation-3 hover:scale-[1.02] hover:border-aurora-teal/50 cursor-pointer'
     : '';
 
   return (

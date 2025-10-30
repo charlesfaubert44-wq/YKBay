@@ -16,19 +16,19 @@ const Button = ({
   const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed touch-target';
 
   const variants = {
-    primary: 'bg-gradient-to-r from-aurora-green to-forest-green text-ice-white hover:shadow-aurora hover:scale-105 active:scale-95 focus:ring-aurora-green',
-    secondary: 'bg-midnight-blue text-ice-blue border-2 border-ice-blue hover:bg-midnight-dark hover:border-aurora-blue active:scale-95 focus:ring-aurora-blue',
-    danger: 'bg-safety-red text-ice-white hover:bg-red-700 hover:shadow-lg active:scale-95 focus:ring-safety-red',
-    outline: 'bg-transparent border-2 border-aurora-green text-aurora-green hover:bg-aurora-green hover:text-ice-white active:scale-95 focus:ring-aurora-green',
-    ghost: 'bg-transparent text-ice-blue hover:bg-ice-white/10 active:bg-ice-white/20 focus:ring-ice-blue',
-    aurora: 'bg-gradient-to-r from-aurora-green via-aurora-purple to-aurora-blue text-ice-white hover:shadow-2xl hover:scale-105 active:scale-95 focus:ring-aurora-purple animate-gradient',
+    primary: 'bg-aurora-teal text-frost-white hover:bg-aurora-teal/90 hover:shadow-aurora hover:scale-105 active:scale-95 focus:ring-aurora-teal',
+    secondary: 'bg-transparent text-aurora-teal border-2 border-aurora-teal hover:bg-aurora-teal/10 active:scale-95 focus:ring-aurora-teal',
+    danger: 'bg-safety-critical text-frost-white hover:bg-safety-critical/90 hover:shadow-lg active:scale-95 focus:ring-safety-critical',
+    outline: 'bg-transparent border-2 border-arctic-ice text-arctic-ice hover:bg-arctic-ice/10 active:scale-95 focus:ring-arctic-ice',
+    ghost: 'bg-transparent text-arctic-ice hover:bg-frost-white/10 active:bg-frost-white/20 focus:ring-arctic-ice',
+    aurora: 'bg-gradient-to-r from-aurora-teal via-aurora-purple to-aurora-blue text-frost-white hover:shadow-2xl hover:scale-105 active:scale-95 focus:ring-aurora-purple animate-gradient',
   };
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-sm rounded-md',
-    md: 'px-4 py-2 text-base rounded-lg',
-    lg: 'px-6 py-3 text-lg rounded-xl',
-    xl: 'px-8 py-4 text-xl rounded-2xl',
+    sm: 'px-3 py-1.5 text-sm rounded-button',
+    md: 'px-4 py-2 text-base rounded-button',
+    lg: 'px-6 py-3 text-lg rounded-button',
+    xl: 'px-8 py-4 text-xl rounded-button',
   };
 
   const widthClass = fullWidth ? 'w-full' : '';

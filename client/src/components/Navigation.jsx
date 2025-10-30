@@ -32,13 +32,18 @@ const Navigation = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center space-x-3 text-ice-white hover:text-tundra-gold transition-all duration-200 group"
+            className="flex items-center space-x-3 text-frost-white hover:text-aurora-teal transition-all duration-200 group"
           >
-            <div className="icon-container group-hover:scale-110 transition-transform">
-              <Mountain size={24} className="text-ice-white" />
-            </div>
+            <img
+              src="/logo-primary.svg"
+              alt="True North Navigator"
+              className="h-8 w-8 group-hover:scale-110 transition-transform"
+            />
             <span className="font-display text-xl font-bold text-shadow-aurora hidden sm:block">
               True North Navigator
+            </span>
+            <span className="text-xs font-medium text-aurora-teal bg-aurora-teal/10 px-2 py-0.5 rounded-full hidden lg:inline">
+              TNN
             </span>
           </Link>
 
@@ -52,12 +57,12 @@ const Navigation = () => {
               <div className="relative ml-2">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-ice-white/10 hover:bg-ice-white/20 transition-all duration-200 touch-target"
+                  className="flex items-center space-x-2 px-4 py-2 rounded-button bg-frost-white/10 hover:bg-frost-white/20 transition-all duration-200 touch-target"
                 >
-                  <div className="w-8 h-8 rounded-full bg-aurora-green flex items-center justify-center">
-                    <User size={18} className="text-ice-white" />
+                  <div className="w-8 h-8 rounded-full bg-aurora-teal flex items-center justify-center">
+                    <User size={18} className="text-frost-white" />
                   </div>
-                  <span className="text-ice-white font-medium">{user?.username}</span>
+                  <span className="text-frost-white font-medium">{user?.username}</span>
                 </button>
 
                 {/* User Dropdown Menu */}
@@ -67,14 +72,14 @@ const Navigation = () => {
                       className="fixed inset-0 z-10"
                       onClick={() => setUserMenuOpen(false)}
                     />
-                    <div className="absolute right-0 mt-2 w-56 bg-midnight-blue border border-ice-blue/20 rounded-lg shadow-2xl py-2 z-20 animate-fadeIn">
-                      <div className="px-4 py-3 border-b border-ice-blue/20">
-                        <p className="text-sm text-ice-blue">Signed in as</p>
-                        <p className="text-ice-white font-semibold truncate">{user?.email}</p>
+                    <div className="absolute right-0 mt-2 w-56 bg-midnight-navy border border-arctic-ice/20 rounded-card shadow-elevation-3 py-2 z-20 animate-fadeIn">
+                      <div className="px-4 py-3 border-b border-arctic-ice/20">
+                        <p className="text-sm text-stone-grey">Signed in as</p>
+                        <p className="text-frost-white font-semibold truncate">{user?.email}</p>
                       </div>
                       <Link
                         to="/dashboard"
-                        className="flex items-center space-x-2 px-4 py-2 text-ice-white hover:bg-ice-white/10 transition-colors"
+                        className="flex items-center space-x-2 px-4 py-2 text-frost-white hover:bg-aurora-teal/10 transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                       >
                         <Settings size={18} />
@@ -82,7 +87,7 @@ const Navigation = () => {
                       </Link>
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center space-x-2 px-4 py-2 text-safety-red hover:bg-safety-red/10 transition-colors"
+                        className="w-full flex items-center space-x-2 px-4 py-2 text-safety-critical hover:bg-safety-critical/10 transition-colors"
                       >
                         <LogOut size={18} />
                         <span>Logout</span>
@@ -100,7 +105,7 @@ const Navigation = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-ice-white p-2 hover:bg-ice-white/10 rounded-lg transition-colors touch-target"
+              className="text-frost-white p-2 hover:bg-aurora-teal/10 rounded-button transition-colors touch-target"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -117,15 +122,15 @@ const Navigation = () => {
 
               {isAuthenticated ? (
                 <>
-                  <div className="px-4 py-2 text-ice-blue text-sm border-t border-ice-white/10 mt-2">
-                    Signed in as <span className="text-ice-white font-semibold">{user?.username}</span>
+                  <div className="px-4 py-2 text-stone-grey text-sm border-t border-frost-white/10 mt-2">
+                    Signed in as <span className="text-frost-white font-semibold">{user?.username}</span>
                   </div>
                   <button
                     onClick={() => {
                       handleLogout();
                       closeMobileMenu();
                     }}
-                    className="flex items-center space-x-3 px-4 py-3 rounded-lg text-safety-red hover:bg-safety-red/10 transition-all duration-200"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-button text-safety-critical hover:bg-safety-critical/10 transition-all duration-200"
                   >
                     <LogOut size={20} />
                     <span>Logout</span>
@@ -144,12 +149,12 @@ const Navigation = () => {
 
 const NavLink = ({ to, icon: Icon, label, active, mobile, onClick }) => {
   const baseClasses = mobile
-    ? "flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200"
-    : "flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 touch-target";
+    ? "flex items-center space-x-3 px-4 py-3 rounded-button transition-all duration-200"
+    : "flex items-center space-x-2 px-4 py-2 rounded-button transition-all duration-200 touch-target";
 
   const activeClasses = active
-    ? "bg-ice-white/20 text-ice-white font-semibold shadow-lg"
-    : "text-ice-blue hover:bg-ice-white/10 hover:text-ice-white hover:scale-105 active:scale-95";
+    ? "bg-aurora-teal/20 text-frost-white font-semibold shadow-aurora"
+    : "text-arctic-ice hover:bg-aurora-teal/10 hover:text-aurora-teal hover:scale-105 active:scale-95";
 
   return (
     <Link to={to} className={`${baseClasses} ${activeClasses}`} onClick={onClick}>

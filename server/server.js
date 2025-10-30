@@ -9,8 +9,34 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(helmet());
+// Allow CORS from local network for mobile testing
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+
+    // Allow localhost and local network IPs
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'http://127.0.0.1:5173',
+      /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:5173$/,  // Local network
+      /^http:\/\/10\.\d{1,3}\.\d{1,3}\.\d{1,3}:5173$/, // Private network
+      /^http:\/\/172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}:5173$/ // Private network
+    ];
+
+    const isAllowed = allowedOrigins.some(pattern => {
+      if (typeof pattern === 'string') {
+        return origin === pattern;
+      }
+      return pattern.test(origin);
+    });
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(compression());
@@ -61,9 +87,11 @@ app.use((req, res) => {
 });
 
 // Start server with error handling
-const server = app.listen(PORT, () => {
+const HOST = process.env.HOST || '0.0.0.0'; // Listen on all network interfaces
+const server = app.listen(PORT, HOST, () => {
   console.log(`\n🚢 True North Navigator API Server`);
-  console.log(`📍 Running on http://localhost:${PORT}`);
+  console.log(`📍 Local:   http://localhost:${PORT}`);
+  console.log(`📍 Network: http://192.168.86.35:${PORT}`);
   console.log(`⏰ Started at ${new Date().toLocaleString()}\n`);
 });
 
